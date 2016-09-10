@@ -67,13 +67,13 @@ task('compile:frontside-scripts', ['build:ts'], () => {
 
 task('copy:frontside-templates', () => {
 	return es.merge(
-		src('./src/sites/**/common/views/**/*.jade')
+		src('./src/sites/**/common/views/**/*.pug')
 			.pipe(dest('./tmp/')),
-		src('./src/sites/**/pages/**/*.jade')
+		src('./src/sites/**/pages/**/*.pug')
 			.pipe(dest('./tmp/')),
-		src('./src/sites/**/common/widgets/**/*.jade')
+		src('./src/sites/**/common/widgets/**/*.pug')
 			.pipe(dest('./tmp/')),
-		src('./src/sites/common/**/*.jade')
+		src('./src/sites/common/**/*.pug')
 			.pipe(dest('./tmp/common'))
 	);
 });

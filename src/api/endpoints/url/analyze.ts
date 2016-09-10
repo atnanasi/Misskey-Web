@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as URL from 'url';
 import * as request from 'request';
-const jade: any = require('jade');
+const pug: any = require('pug');
 
 // only for analyzeNicovideo
 const xml2json = require('xml2json');
@@ -77,8 +77,8 @@ export default function analyze(req: express.Request, res: express.Response): vo
 function showImage(res: express.Response, src: string, href: string): void {
 	'use strict';
 
-	const compiler: (locals: any) => string = jade.compileFile(
-		`${__dirname}/image.jade`);
+	const compiler: (locals: any) => string = pug.compileFile(
+		`${__dirname}/image.pug`);
 
 	const image: string = compiler({
 		src,
@@ -105,8 +105,8 @@ function analyzeWikipedia(req: express.Request, res: express.Response, url: URL.
 		// Favicon
 		const icon: string = URL.resolve(url.href, $('link[rel="shortcut icon"]').attr('href'));
 
-		const compiler: (locals: any) => string = jade.compileFile(
-			`${__dirname}/summary.jade`);
+		const compiler: (locals: any) => string = pug.compileFile(
+			`${__dirname}/summary.pug`);
 
 		const viewer = compiler({
 			url: url,
@@ -140,8 +140,8 @@ function analyzeMobileWikipedia(req: express.Request, res: express.Response, url
 		// Favicon
 		const icon: string = URL.resolve(url.href, $('link[rel="shortcut icon"]').attr('href'));
 
-		const compiler: (locals: any) => string = jade.compileFile(
-			`${__dirname}/summary.jade`);
+		const compiler: (locals: any) => string = pug.compileFile(
+			`${__dirname}/summary.pug`);
 
 		const viewer = compiler({
 			url: url,
@@ -177,8 +177,8 @@ function analyzeYoutube(req: express.Request, res: express.Response, url: URL.Ur
 
 	const videoId = getVideoId();
 
-	const compiler: (locals: any) => string = jade.compileFile(
-		`${__dirname}/youtube.jade`);
+	const compiler: (locals: any) => string = pug.compileFile(
+		`${__dirname}/youtube.pug`);
 
 	const player: string = compiler({
 		videoId
@@ -234,8 +234,8 @@ function analyzeGithubGist(req: express.Request, res: express.Response, url: URL
 			} else if (getRawResponse.statusCode !== 200) {
 				return res.sendStatus(204);
 			} else {
-				const compiler: (locals: any) => string = jade.compileFile(
-					`${__dirname}/gist.jade`);
+				const compiler: (locals: any) => string = pug.compileFile(
+					`${__dirname}/gist.pug`);
 
 				const viewer: string = compiler({
 					url: url.href,
@@ -465,8 +465,8 @@ function analyzeNicovideo(req: express.Request, res: express.Response, url: URL.
 			}
 		}
 
-		const compiler: (locals: any) => string = jade.compileFile(
-			`${__dirname}/nicovideo.jade`);
+		const compiler: (locals: any) => string = pug.compileFile(
+			`${__dirname}/nicovideo.pug`);
 
 		const viewer = compiler({
 			url: url,
@@ -564,8 +564,8 @@ function analyzeGeneral(req: express.Request, res: express.Response, url: URL.Ur
 			'/favicon.ico');
 		icon = icon !== null ? wrapMisskeyProxy(URL.resolve(url.href, icon)) : null;
 
-		const compiler: (locals: any) => string = jade.compileFile(
-			`${__dirname}/summary.jade`);
+		const compiler: (locals: any) => string = pug.compileFile(
+			`${__dirname}/summary.pug`);
 
 		// コンパイル
 		const viewer: string = compiler({
